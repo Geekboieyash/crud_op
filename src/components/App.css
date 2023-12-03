@@ -1,0 +1,109 @@
+/* App.css */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .toolbar {
+    margin-top: 10px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  .delete-selected {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* SearchBar.css */
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .search-bar input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .search-icon {
+    margin-left: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* UserTable.css */
+  
+  .selected {
+    background-color: #d3d3d3;
+  }
+  
+  .edit, .delete {
+    margin-right: 5px;
+    padding: 6px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Footer.css */
+  
+  .footer {
+    margin-top: 20px;
+  }
+  
+  .page-numbers {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .page-numbers li {
+    margin-right: 5px;
+  }
+  
+  .page-number-btn {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .page-number-btn:hover {
+    background-color: #0056b3;
+  }
+  
