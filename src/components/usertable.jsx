@@ -1,11 +1,11 @@
 // UserTable.jsx
 import React, { useState } from 'react';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaSave } from 'react-icons/fa';
 import './usertable.css';
 
 const UserTable = ({ users, selectedRows, toggleSelect, editRow, deleteRow }) => {
   const [selectAll, setSelectAll] = useState(false);
-  const [editingCell, setEditingCell] = useState(null);
+  const [editingRow, setEditingRow] = useState(null);
 
   const handleSelectAll = () => {
     setSelectAll(!selectAll);
@@ -18,9 +18,13 @@ const UserTable = ({ users, selectedRows, toggleSelect, editRow, deleteRow }) =>
     });
   };
 
-  const handleEdit = (id, field, value) => {
-    editRow(id, field, value); // Call the editRow function to update the state
-    setEditingCell(null);
+  const handleEdit = (user) => {
+    setEditingRow(user.id);
+  };
+
+  const handleSave = (user) => {
+    setEditingRow(null);
+    // You can add the logic to save the changes to the database if needed
   };
 
   return (
@@ -32,30 +36,9 @@ const UserTable = ({ users, selectedRows, toggleSelect, editRow, deleteRow }) =>
               <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
             </th>
             <th>ID</th>
-            <th>
-              <span
-                className={editingCell?.field === 'name' ? 'editable' : ''}
-                onClick={() => setEditingCell({ id: null, field: 'name' })}
-              >
-                Name
-              </span>
-            </th>
-            <th>
-              <span
-                className={editingCell?.field === 'email' ? 'editable' : ''}
-                onClick={() => setEditingCell({ id: null, field: 'email' })}
-              >
-                Email
-              </span>
-            </th>
-            <th>
-              <span
-                className={editingCell?.field === 'role' ? 'editable' : ''}
-                onClick={() => setEditingCell({ id: null, field: 'role' })}
-              >
-                Role
-              </span>
-            </th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -71,45 +54,45 @@ const UserTable = ({ users, selectedRows, toggleSelect, editRow, deleteRow }) =>
               </td>
               <td>{user.id}</td>
               <td>
-                {editingCell?.id === user.id && editingCell?.field === 'name' ? (
+                {editingRow === user.id ? (
                   <input
                     value={user.name}
                     onChange={(e) => editRow(user.id, 'name', e.target.value)}
-                    onBlur={() => setEditingCell(null)}
                   />
                 ) : (
                   user.name
                 )}
               </td>
               <td>
-                {editingCell?.id === user.id && editingCell?.field === 'email' ? (
+                {editingRow === user.id ? (
                   <input
                     value={user.email}
                     onChange={(e) => editRow(user.id, 'email', e.target.value)}
-                    onBlur={() => setEditingCell(null)}
                   />
                 ) : (
                   user.email
                 )}
               </td>
               <td>
-                {editingCell?.id === user.id && editingCell?.field === 'role' ? (
+                {editingRow === user.id ? (
                   <input
                     value={user.role}
                     onChange={(e) => editRow(user.id, 'role', e.target.value)}
-                    onBlur={() => setEditingCell(null)}
                   />
                 ) : (
                   user.role
                 )}
               </td>
               <td className="row-actions">
-                <button
-                  className="edit"
-                  onClick={() => setEditingCell({ id: user.id, field: 'name' })}
-                >
-                  <FaEdit />
-                </button>
+                {editingRow === user.id ? (
+                  <button className="save" onClick={() => handleSave(user)}>
+                    <FaSave />
+                  </button>
+                ) : (
+                  <button className="edit" onClick={() => handleEdit(user)}>
+                    <FaEdit />
+                  </button>
+                )}
                 <button className="delete" onClick={() => deleteRow(user.id)}>
                   <FaTrash />
                 </button>
